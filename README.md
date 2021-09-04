@@ -1,6 +1,6 @@
 # JOE&WOLFIE's
 
-## hotel application which provides two services- "Book a Room" and "Reserve a Table". 
+## A hotel application which provides two services- "Book a Room" and "Reserve a Table". 
 The Booking Room page contains a variety of rooms with different features to select.
 The Reserve Table page has different occasions to reserve a table.
 
@@ -22,4 +22,3 @@ cd JOE-WOLFIE
 open using Android studio and build it.
 
 ```NOTE:```To run this app, you will need android studio. You can download from [here](https://developer.android.com/studio?gclid=EAIaIQobChMI5bKU9Lzl8gIVsJlmAh12cQqwEAAYASABEgIfN_D_BwE&gclsrc=aw.ds#downloads)
-
