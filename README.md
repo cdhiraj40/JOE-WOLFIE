@@ -21,5 +21,5 @@ cd JOE-WOLFIE
 ```
 open using Android studio and build it.
 
-```NOTE:```To run this app, you will need android studio. You can download from [here]{https://developer.android.com/studio?gclid=EAIaIQobChMI5bKU9Lzl8gIVsJlmAh12cQqwEAAYASABEgIfN_D_BwE&gclsrc=aw.ds#downloads}
+```NOTE:```To run this app, you will need android studio. You can download from [here](https://developer.android.com/studio?gclid=EAIaIQobChMI5bKU9Lzl8gIVsJlmAh12cQqwEAAYASABEgIfN_D_BwE&gclsrc=aw.ds#downloads)
 
