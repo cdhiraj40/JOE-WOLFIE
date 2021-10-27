@@ -16,11 +16,16 @@
         <activity android:name=".Select_room" />
         <activity android:name=".Reserve"/>
         <activity android:name=".Book"/>
+        <activity android:name=".LauncherActivity"
+            android:theme="@style/LaunchTheme"
+            android:noHistory="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 </manifest>
