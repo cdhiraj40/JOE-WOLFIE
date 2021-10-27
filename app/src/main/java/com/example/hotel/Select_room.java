@@ -1,6 +1,8 @@
 package com.example.hotel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,99 +11,48 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Select_room extends AppCompatActivity {
-    Button single_b, double_b, queen_b, king_b, suite_b, msuite_b;
-    Integer price, room_price;
-    TextView single_p, double_p, queen_p, king_p, msuite_p, suite_p;
+    List<String> roomName= new ArrayList<>();
+    List<String> roomPrice= new ArrayList<>();
+    List<Integer> roomImage= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_room);
 
-        single_b= (Button) findViewById(R.id.single_b);
-        double_b= (Button) findViewById(R.id.double_b);
-        queen_b= (Button) findViewById(R.id.queen_b);
-        king_b= (Button) findViewById(R.id.king_b);
-        suite_b= (Button) findViewById(R.id.suite_b);
-        msuite_b= (Button) findViewById(R.id.msuite_b);
-
         Bundle bundle = getIntent().getExtras();
         Integer total_day= bundle.getInt("total_day");
         Integer total_room= bundle.getInt("total_room");
 
-        single_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                price= total_day * total_room * 5400;
-                Intent intent= new Intent(Select_room.this, Booking.class);
-                Bundle mybundle = new Bundle();
-                mybundle.putInt("price", price );
-                intent.putExtras(mybundle);
-                startActivity(intent);
-            }
-        });
+        roomName.add("Single Room");
+        roomName.add("Double Room");
+        roomName.add("King Room");
+        roomName.add("Queen Room");
+        roomName.add("Suite Room");
+        roomName.add("Master Suite Room");
 
-        double_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                price= total_day * total_room * 6300;
-                Intent intent= new Intent(Select_room.this, Booking.class);
-                Bundle mybundle = new Bundle();
-                mybundle.putInt("price", price );
-                intent.putExtras(mybundle);
-                startActivity(intent);
-            }
-        });
+        roomPrice.add("5400");
+        roomPrice.add("6400");
+        roomPrice.add("7000");
+        roomPrice.add("8500");
+        roomPrice.add("9000");
+        roomPrice.add("10000");
 
-        queen_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                price= total_day * total_room * 7000;
-                Intent intent= new Intent(Select_room.this, Booking.class);
-                Bundle mybundle = new Bundle();
-                mybundle.putInt("price", price );
-                intent.putExtras(mybundle);
-                startActivity(intent);
-            }
-        });
+        roomImage.add(R.drawable.single);
+        roomImage.add(R.drawable.doublee);
+        roomImage.add(R.drawable.king);
+        roomImage.add(R.drawable.queen);
+        roomImage.add(R.drawable.suite);
+        roomImage.add(R.drawable.master_suite);
 
-        king_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                price= total_day * total_room * 7200;
-                Intent intent= new Intent(Select_room.this, Booking.class);
-                Bundle mybundle = new Bundle();
-                mybundle.putInt("price", price );
-                intent.putExtras(mybundle);
-                startActivity(intent);
-            }
-        });
-
-        suite_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                price= total_day * total_room * 8000;
-                Intent intent= new Intent(Select_room.this, Booking.class);
-                Bundle mybundle = new Bundle();
-                mybundle.putInt("price", price );
-                intent.putExtras(mybundle);
-                startActivity(intent);
-            }
-        });
-
-        msuite_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                price= total_day * total_room * 9500;
-                Intent intent= new Intent(Select_room.this, Booking.class);
-                Bundle mybundle = new Bundle();
-                mybundle.putInt("price", price );
-                intent.putExtras(mybundle);
-                startActivity(intent);
-            }
-        });
-
+        RecyclerView recyclerView= (RecyclerView) findViewById(R.id.recyclerRoom);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        SelectRoomAdapter adapter= new SelectRoomAdapter(roomName, roomPrice, roomImage, total_day, total_room);
+        recyclerView.setAdapter(adapter);
 
     }
 }
