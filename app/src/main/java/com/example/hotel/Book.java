@@ -2,7 +2,9 @@ package com.example.hotel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -11,7 +13,9 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +27,7 @@ public class Book extends AppCompatActivity {
     Integer num_room=0, num_adult=0, num_child=0, total_room, num1, num2;
     String room_text, adult_text, child_text;
     DatePickerDialog datepicker1, datepicker2;
-
+    Date date1,date2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,11 @@ public class Book extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 String check_in= dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                                try {
+                                    date1 = myFormat.parse(check_in);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
                                 date_in.setText(check_in);
                                 num1= dayOfMonth;
                             }
@@ -91,6 +100,11 @@ public class Book extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 String check_out= dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                                try {
+                                    date2 = myFormat.parse(check_out);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
                                 date_out.setText(check_out);
                                 num2= dayOfMonth;
                             }
@@ -153,14 +167,21 @@ public class Book extends AppCompatActivity {
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer total_day= num2- num1;
-                total_room= Integer.parseInt(room.getText().toString());
-                Intent myIntent = new Intent(Book.this, Select_room.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("total_day", total_day );
-                bundle.putInt("total_room", total_room );
-                myIntent.putExtras(bundle);
-                startActivity(myIntent);
+                if(date1.after(date2)){
+                    Toast.makeText(getApplicationContext(),"Invalid date",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Integer total_day= num2- num1;
+                    total_room= Integer.parseInt(room.getText().toString());
+                    Intent myIntent = new Intent(Book.this, Select_room.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("total_day", total_day );
+                    bundle.putInt("total_room", total_room );
+                    myIntent.putExtras(bundle);
+                    startActivity(myIntent);
+                }
+
             }
         });
 
